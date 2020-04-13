@@ -17,6 +17,9 @@
                     <div class="col-full tags">
                         <div class="tagcloud">
                             <a href="{% url 'update' pk=blog.pk %}"><i class="fas fa-pen fa-3x"></i></a>
+                            {% if user.is_superuser %}
+                            <a href="{% url 'delete' pk=blog.pk %}"><i class="fas fa-trash-alt fa-3x fa-spin"></i></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

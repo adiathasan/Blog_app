@@ -78,6 +78,13 @@ def draft_post(request):
 
 
 @login_required(login_url='login')
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('/', pk=post.pk)
+
+
+@login_required(login_url='login')
 def post_blog(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
@@ -122,6 +129,7 @@ def logoutpage(request):
     logout(request)
     return redirect('home')
 
+
 @login_required(login_url='login')
 def comment_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -144,4 +152,3 @@ def remove_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('blog', pk=comment.post.pk)
-
